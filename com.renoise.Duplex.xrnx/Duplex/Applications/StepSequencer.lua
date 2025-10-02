@@ -144,7 +144,7 @@ StepSequencer.default_options = {
   display_notes = {
     label = "Display notes",
     description = "Choose if you want to display the note values" 
-                .."\onto the grid buttons in Duplex",
+                .."\nonto the grid buttons in Duplex",
     on_change = function(inst)
       inst._update_grid_requested = true
     end,
