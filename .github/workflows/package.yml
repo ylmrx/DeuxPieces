@@ -25,7 +25,7 @@ jobs:
           # git clone --recurse-submodules --remote-submodules \
           #   --depth 1 https://github.com/renoise/tools.git
           PACKAGE_NAME=com.renoise.Duplex
-          CODE_PATH=tools/Tools/${PACKAGE_NAME}.xrnx
+          CODE_PATH=${PACKAGE_NAME}.xrnx
           TIMESTAMP=$(date +'%Y-%m-%d_%H-%M-%S')
           echo "TAG_NAME=$TIMESTAMP" >> $GITHUB_ENV
           echo "FILENAME=${PACKAGE_NAME}_${TIMESTAMP}.xrnx" >> $GITHUB_ENV
