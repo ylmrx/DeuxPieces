@@ -1,8 +1,9 @@
 
 [submodule "com.renoise.Duplex.xrnx/cLib"]
 	path = com.renoise.Duplex.xrnx/cLib
-	url = https://github.com/ylmrx/rns_cLib
-	branch = fix/cscheduler
+	# url = https://github.com/ylmrx/rns_cLib
+	url = https://github.com/renoise/cLib
+	branch = 58d6efd67d44631f6946290d888ee28ff9781553
 [submodule "com.renoise.Duplex.xrnx/xLib"]
 	path = com.renoise.Duplex.xrnx/xLib
 	url = https://github.com/esaruoho/xLib
