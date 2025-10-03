@@ -21,27 +21,37 @@ duplex_configurations:insert {
 
   applications = {
     GridPie = {
-	    mappings = {
-	      grid = {
+--      palette = {
+--        empty = {color=LaunchpadMiniMK3.COLOR_OFF},
+--        empty_current = {color=LaunchpadMiniMK3.COLOR_YELLOW},
+--        empty_active = {color=LaunchpadMiniMK3.COLOR_MAGENTA},
+--        empty_active_current = {color=LaunchpadMiniMK3.COLOR_MAGENTA},
+--        content_active = {color=LaunchpadMiniMK3.COLOR_CYAN},
+--        content_active_current = {color=LaunchpadMiniMK3.COLOR_CYAN},
+--        content_selected = {color=LaunchpadMiniMK3.COLOR_GREEN},
+--        inactive_content = {color=LaunchpadMiniMK3.COLOR_BLUE}
+--      },
+      mappings = {
+        grid = {
           group_name = "Grid",
         },
-	      v_prev = {
+        v_prev = {
           group_name = "Controls",
           index = 1,
         },
-	      v_next = {
+        v_next = {
           group_name = "Controls",
           index = 2,
         },
-	      h_prev = {
+        h_prev = {
           group_name = "Controls",
           index = 3,
         },
-	      h_next = {
+        h_next = {
           group_name = "Controls",
           index = 4,
         },
-    	},
+      },
       options = {
         follow_pos = 2
       },

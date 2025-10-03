@@ -68,3 +68,4 @@ function LaunchpadMiniMK3:output_value(pt,xarg,ui_obj)
     return MidiDevice.output_value(self,pt,xarg,ui_obj)
   end
 end
+
