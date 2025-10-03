@@ -1417,8 +1417,8 @@ function GridPie:paint_cell(cell,x,y)
     local patt_idx = rns.sequencer.pattern_sequence[seq_idx]
     local ptrack = rns.patterns[patt_idx].tracks[track_idx]
     local empty = ptrack.is_empty
+    -- show that an aliased slot can be resolved
     if empty then
-
       if self._is_monochrome then
         cell:set(self.palette.empty)
         --[[
@@ -1459,7 +1459,7 @@ function GridPie:paint_cell(cell,x,y)
           end
         end
       else -- display has color
-        if muted then 
+        if muted then
           local active_track = self.poly_counter[track_idx] and true or false
           if active_track then
             local is_master = is_master_slot(ptrack,track_idx,patt_idx)
@@ -1802,7 +1802,6 @@ function GridPie:_toggle_slot(seq_idx,track_idx)
   --print("*** _toggle_slot - old_lc",old_lc)
 
   --print("*** toggle_slot - patt",patt)
-
   -- true when we perform a recorded action (create a homeless slot)
   local stay_homeless = false
 
@@ -1988,7 +1987,7 @@ function GridPie:_toggle_pattern(seq_idx,track_idx)
       for track_idx = 1,rns.sequencer_track_count do
         local ptrk = gridpie_patt.tracks[track_idx]
         local has_master,master_p_idx = self:has_aliased_master(ptrk,track_idx)
-        --print("*** has_master,master_p_idx",has_master,master_p_idx)
+        -- print("*** has_master,master_p_idx",has_master,master_p_idx)
         local record_p_idx = (has_master) and master_p_idx or patt_idx
         self:toggle_slot_record(gridpie_patt,track_idx,true,record_p_idx)
       end
@@ -2083,7 +2082,6 @@ end
 -- @return (bool[,int]) - is_alias & alias_pattern_index (optional)
 
 function GridPie:has_aliased_master(ptrk,track_idx)
-
   if ptrk.is_alias then
     local mst_seq_idx = self.active_slots[track_idx]
     if mst_seq_idx and 
@@ -2993,7 +2991,6 @@ function GridPie:resolve_patt_idx(patt_idx,track_idx)
   end
   --TRACE("GridPie:resolve_patt_idx() - patt_idx,track_idx",patt_idx,track_idx,"=patt_idx",patt_idx)
   return patt_idx
-    
 end
 
 
@@ -4171,7 +4168,7 @@ function OneShotIdleNotifier:__init(delay_in_ms, callback, ...)
   assert(type(callback) == "function")
 
   self._callback = callback
-  self._args = arg
+  self._args = {...}
   self._invoke_time = os.clock() + delay_in_ms / 1000
 
   renoise.tool().app_idle_observable:add_notifier(self, self.__on_idle)

@@ -1123,12 +1123,12 @@ function StepSequencer:post_jump_update()
   TRACE("StepSequencer:post_jump_update()")
 
   self._follow_player = false
-  self._update_grid_requested = true 
+  self._update_grid_requested = true
   self:_update_line_buttons()
 
   if (self.options.follow_line.value == FOLLOW_LINE_SET) then
     local line_idx = self:_get_line_offset()+1
-    xPatternPos.jump_to_line(safe_line)
+    xPatternPos.jump_to_line(line_idx)
   end
 
 end
