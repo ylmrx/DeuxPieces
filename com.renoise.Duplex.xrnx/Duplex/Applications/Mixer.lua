@@ -1294,7 +1294,7 @@ function Mixer:_attach_to_tracks(new_song)
           if (self.active) then
             local value = volume.value
             -- compensate for potential loss of precision 
-            if not 
+            if cLib and not
               cLib.float_compare(self._controls.volume[control_index].value, value, 1000) 
             then
               self:set_track_volume(control_index, value)
@@ -1316,9 +1316,9 @@ function Mixer:_attach_to_tracks(new_song)
       if not track then
         break
       end
-      local panning = (self._postfx_mode) and 
+      local panning = (self._postfx_mode) and
          track.postfx_panning or track.prefx_panning
-      
+
       self._attached_track_observables:insert(
         panning.value_observable)
 
@@ -1328,7 +1328,7 @@ function Mixer:_attach_to_tracks(new_song)
           if (self.active) then
             local value = panning.value
             -- compensate for potential loss of precision 
-            if not 
+            if cLib and not
               cLib.float_compare(self._controls.panning[control_index].value, value, 1000) 
             then
               self:set_track_panning(control_index, value)
@@ -1369,7 +1369,7 @@ function Mixer:_attach_to_tracks(new_song)
       end
       self._attached_track_observables:insert(track.solo_state_observable)
       track.solo_state_observable:add_notifier(
-        self, 
+        self,
         function()
           if (self.active) then
             self:set_track_solo(control_index, track.solo_state)
@@ -1397,7 +1397,7 @@ function Mixer:_attach_to_tracks(new_song)
         if (self.active) then
           local value = volume.value
           -- compensate for potential loss of precision 
-          if not cLib.float_compare(self._controls.master.value, value, 1000) then
+          if cLib and not cLib.float_compare(self._controls.master.value, value, 1000) then
             self._controls.master:set_value(value)
           end
         end
@@ -1445,13 +1445,15 @@ function Mixer:_set_take_over_volume(p_volume, p_obj, p_track_index)
 
     -- determines if fader has reached/crossed the track volume
     -- first, see if the volume is within threshold ("sticky")
-    local reached = cLib.float_compare(p_volume.value,p_obj.value,5)
-    if not reached then
-      local x1 = p_volume.value - take_over.last_value 
-      local x2 = p_volume.value - p_obj.value
-      reached = (cLib.sign(x1) ~= cLib.sign(x2))
+    if (cLib) then
+      local reached = cLib.float_compare(p_volume.value,p_obj.value,5)
+      if not reached then
+        local x1 = p_volume.value - take_over.last_value
+        local x2 = p_volume.value - p_obj.value
+        reached = (cLib.sign(x1) ~= cLib.sign(x2))
+      end
     end
-    
+
     if reached then 
       p_volume.value = p_obj.value
       take_over.hook = false

@@ -503,7 +503,7 @@ function Effect:_build_app()
         local normalized_value = self:_parameter_value_to_normalized_value(
           parameter, parameter.value)
         -- ignore floating point fuziness    
-        if (not cLib.float_compare(normalized_value, obj.value, FLOAT_COMPARE_QUANTUM) or 
+        if (cLib and not cLib.float_compare(normalized_value, obj.value, FLOAT_COMPARE_QUANTUM) or
             obj.value == 0.0 or obj.value == 1.0) -- be exact at the min/max 
         then
           -- scale the [0-1] ranged value to the parameters value
@@ -1456,27 +1456,26 @@ function Effect:_attach_to_parameters(new_song)
             local normalized_value = self:_parameter_value_to_normalized_value(
               parameter, parameter.value) 
             -- ignore floating point fuzziness    
-            if (not cLib.float_compare(normalized_value, control.value, FLOAT_COMPARE_QUANTUM) or
+            if (cLib and not cLib.float_compare(normalized_value, control.value, FLOAT_COMPARE_QUANTUM) or
                 normalized_value == 0.0 or normalized_value == 1.0) -- be exact at the min/max 
             then
               local skip_event = true -- only update the Duplex UI
-	            self:set_parameter(control_index, normalized_value, skip_event)
-
+              self:set_parameter(control_index, normalized_value, skip_event)
               if self._param_values and self._param_values[control_index] then
                 self._param_values[control_index]:set_text(parameter.value_string)
               end
 
             end
           end
-        end 
+        end
       )
     end
-    
+
     if self._param_names and self._param_names[control_index] then
       local param_name = parameter and parameter.name or "-"
       self._param_names[control_index]:set_text(param_name)
     end
-    
+
     if self._param_values and self._param_values[control_index] then
      local param_value = parameter and parameter.value_string or ""
      self._param_values[control_index]:set_text(param_value)
