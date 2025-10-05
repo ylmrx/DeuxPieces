@@ -678,7 +678,7 @@ function Navigator:_jump_to_index(ctrl_idx)
     end    
     if (playback_line < 1) then
       new_pos.line = 1
-      new_pos = xSongPos.decrease_by_lines(1,new_pos)
+      xSongPos.decrease_by_lines(1,new_pos)
     else
       new_pos.line = playback_line
     end
@@ -912,4 +912,6 @@ function Navigator:_determine_loop_type()
   end
 
 end
+
+
 
