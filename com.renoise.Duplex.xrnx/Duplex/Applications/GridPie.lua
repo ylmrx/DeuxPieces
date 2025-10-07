@@ -4177,7 +4177,7 @@ end
 function OneShotIdleNotifier:__on_idle()
   if (os.clock() >= self._invoke_time) then
     renoise.tool().app_idle_observable:remove_notifier(self, self.__on_idle)
-    self._callback(unpack(self._args))
+    self._callback(table.unpack(self._args))
   end
 end
 
