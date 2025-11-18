@@ -1299,8 +1299,8 @@ function Matrix:_attach_to_song()
   rns.selected_track_index_observable:add_notifier(
     function()
       TRACE("Matrix:selected_track_observable fired...")
-      if not self.active then 
-        return false 
+      if not self.active then
+        return false
       end
       self:_follow_track()
     end

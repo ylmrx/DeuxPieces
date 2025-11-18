@@ -1445,19 +1445,15 @@ function Mixer:_set_take_over_volume(p_volume, p_obj, p_track_index)
 
     -- determines if fader has reached/crossed the track volume
     -- first, see if the volume is within threshold ("sticky")
-    if (cLib) then
-      local reached = cLib.float_compare(p_volume.value,p_obj.value,5)
-      if not reached then
-        local x1 = p_volume.value - take_over.last_value
-        local x2 = p_volume.value - p_obj.value
-        reached = (cLib.sign(x1) ~= cLib.sign(x2))
-      end
-    end
-
-    if reached then 
+    local reached = cLib.float_compare(p_volume.value,p_obj.value,5)
+    if reached then
       p_volume.value = p_obj.value
       take_over.hook = false
       value_set = true
+    else
+      local x1 = p_volume.value - take_over.last_value
+      local x2 = p_volume.value - p_obj.value
+      reached = (cLib.sign(x1) ~= cLib.sign(x2))
     end
   else
     -- hook is deactivated, Mixer reacts normally
